@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "564869125650",
+    "project_id": "quick-chat-793b0",
+    "storage_bucket": "quick-chat-793b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564869125650:android:d156b0efa45f22b47daacb",
+        "android_client_info": {
+          "package_name": "com.chirag.quick_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564869125650-l03q28mned5appubcg3ktfrgq9hfotpt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chirag.quick_chat",
+            "certificate_hash": "4307c5dbf9c40b723fedfd2bd0c001394e5f2559"
+          }
+        },
+        {
+          "client_id": "564869125650-4fvqqcgetm9be9p4ojl49nai2hem8r18.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc21HyUBGhrqgOHYlQlX1SV2rEOXFGDTM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564869125650-4fvqqcgetm9be9p4ojl49nai2hem8r18.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "564869125650-ec2ea9ron3aslpqhmhclmn19k2hlgpff.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.quickChat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
