@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quick_chat/utils/app_colors.dart';
 import 'package:quick_chat/utils/app_text_style.dart';
 import 'package:quick_chat/widget/auth_widget.dart';
+import 'package:quick_chat/utils/api/api.dart';
+import 'package:quick_chat/widget/snack_bar.dart';
 
 class ForgetView extends StatefulWidget {
   const ForgetView({super.key});
@@ -12,7 +14,37 @@ class ForgetView extends StatefulWidget {
 }
 
 class _ForgetViewState extends State<ForgetView> {
+  bool isLoading = false;
+  final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
+  }
+
+  void _forgetPasswordButton() {
+    setState(() {
+      isLoading = true;
+    });
+
+    API.auth
+        .sendPasswordResetEmail(email: emailController.text.toString())
+        .then((value) {
+      successMessage(context,
+          'We have sent you email to recover password, please check email');
+      setState(() {
+        isLoading = false;
+      });
+    }).onError((error, stackTrace) {
+      errorMessage(context, error.toString());
+      setState(() {
+        isLoading = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,21 +97,32 @@ class _ForgetViewState extends State<ForgetView> {
                       color: CustomColors.white,
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(110))),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10.h),
-                          child: Text(
-                            'Forget Password',
-                            style: CustomTextStyle.salsa(fontSize: 35.sp),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10.h),
+                            child: Text(
+                              'Forget Password',
+                              style: CustomTextStyle.salsa(fontSize: 35.sp),
+                            ),
                           ),
-                        ),
-                        EmailTextField(
-                          controller: emailController,
-                        ),
-                        AuthButton(label: 'Forget', onTap: () {}),
-                      ]),
+                          EmailTextField(
+                            controller: emailController,
+                          ),
+                          isLoading == true
+                              ? const CircularProgressIndicator(
+                                  color: Colors.black,
+                                )
+                              : AuthButton(
+                                  label: 'Forget',
+                                  onTap: () {
+                                    _forgetPasswordButton();
+                                  }),
+                        ]),
+                  ),
                 )
               ],
             ),

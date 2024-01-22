@@ -23,4 +23,13 @@ class CustomTextStyle {
         fontWeight: weight,
         fontFamily: 'Grandstander');
   }
+
+  static TextStyle merriweatherSans(
+      {required double fontSize, required FontWeight weight}) {
+    return TextStyle(
+        color: Colors.white,
+        fontSize: fontSize,
+        fontWeight: weight,
+        fontFamily: 'MerriweatherSans');
+  }
 }

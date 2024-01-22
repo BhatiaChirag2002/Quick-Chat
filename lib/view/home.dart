@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quick_chat/utils/api/api.dart';
 import 'package:quick_chat/utils/app_colors.dart';
 import 'package:quick_chat/utils/app_text_style.dart';
+import 'package:quick_chat/view/auth/login_view.dart';
 import 'package:quick_chat/widget/chat_user_card.dart';
+import 'package:quick_chat/widget/snack_bar.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -11,6 +14,16 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  void logoutButton() {
+    API.auth.signOut().then((value) {
+      successMessage(context, 'Logout Successfully');
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const LoginView()));
+    }).onError((error, stackTrace) {
+      errorMessage(context, error.toString());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +49,9 @@ class _HomeViewState extends State<HomeView> {
             color: CustomColors.black,
             itemBuilder: (context) => [
               PopupMenuItem(
-                  onTap: () {},
+                  onTap: () {
+                    logoutButton();
+                  },
                   child: Text(
                     'Logout',
                     style: CustomTextStyle.salsa(

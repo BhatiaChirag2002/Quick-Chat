@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quick_chat/utils/text_style.dart';
+import 'package:quick_chat/utils/app_text_style.dart';
 
 successMessage(BuildContext context, String message) {
   return ScaffoldMessenger.of(context).showSnackBar(SnackBar(

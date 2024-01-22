@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:quick_chat/utils/api/api.dart';
 import 'package:quick_chat/view/auth/login_view.dart';
+import 'package:quick_chat/view/home.dart';
 import 'package:quick_chat/widget/auth_widget.dart';
 import 'package:quick_chat/utils/app_colors.dart';
 import 'package:quick_chat/utils/app_text_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quick_chat/widget/snack_bar.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -13,9 +16,48 @@ class SignUpView extends StatefulWidget {
 }
 
 class _SignUpViewState extends State<SignUpView> {
+  bool isLoading = false;
+  final _formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  void signupButton() {
+    setState(() {
+      isLoading = true;
+    });
+    if (_formKey.currentState!.validate()) {
+      API.auth
+          .createUserWithEmailAndPassword(
+              email: emailController.text.toString(),
+              password: passwordController.text.toString())
+          .then((value) {
+        setState(() {
+          isLoading = false;
+        });
+        successMessage(context, 'You have registered successfully');
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => const HomeView()));
+      }).onError((error, stackTrace) {
+        errorMessage(context, error.toString());
+        setState(() {
+          isLoading = false;
+        });
+      });
+    } else {
+      setState(() {});
+      validatorErrorMessage(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,35 +92,46 @@ class _SignUpViewState extends State<SignUpView> {
                       color: CustomColors.white,
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(110))),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 12.h),
-                          child: Text(
-                            'Sign Up',
-                            style: CustomTextStyle.salsa(fontSize: 35.sp),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 12.h),
+                            child: Text(
+                              'Sign Up',
+                              style: CustomTextStyle.salsa(fontSize: 35.sp),
+                            ),
                           ),
-                        ),
-                        NameTextField(controller: nameController),
-                        EmailTextField(
-                          controller: emailController,
-                        ),
-                        PasswordTextField(
-                          controller: passwordController,
-                        ),
-                        AuthButton(label: 'Sign Up', onTap: () {}),
-                        HaveAccountButton(
-                          question: 'Already have Account?',
-                          label: 'Login',
-                          onTap: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const LoginView()));
-                          },
-                        ),
-                      ]),
+                          NameTextField(controller: nameController),
+                          EmailTextField(
+                            controller: emailController,
+                          ),
+                          PasswordTextField(
+                            controller: passwordController,
+                          ),
+                          isLoading == true
+                              ? const CircularProgressIndicator(
+                                  color: Colors.black,
+                                )
+                              : AuthButton(
+                                  label: 'Sign Up',
+                                  onTap: () {
+                                    signupButton();
+                                  }),
+                          HaveAccountButton(
+                            question: 'Already have Account?',
+                            label: 'Login',
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const LoginView()));
+                            },
+                          ),
+                        ]),
+                  ),
                 )
               ],
             ),
