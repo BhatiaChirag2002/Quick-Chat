@@ -63,7 +63,7 @@ class _HomeViewState extends State<HomeView> {
         ),
       ),
       body: ListView.builder(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           itemCount: 30,
           itemBuilder: (context, index) {
             return const ChatUserCard();

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quick_chat/utils/app_colors.dart';
 import 'package:quick_chat/utils/app_text_style.dart';
 import 'package:quick_chat/utils/my_flutter_app_icons.dart';
-import 'package:quick_chat/view/home.dart';
+import 'package:quick_chat/view/auth/login_view.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -42,9 +42,9 @@ class _SplashViewState extends State<SplashView> {
       });
     });
     Timer(
-        const Duration(seconds: 10),
+        const Duration(seconds: 9),
         () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const HomeView())));
+            MaterialPageRoute(builder: (context) => const LoginView())));
   }
 
   @override
