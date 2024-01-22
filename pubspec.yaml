@@ -89,3 +89,20 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  assets:
+    - assets/image/
+  fonts:
+    - family: MyFlutterApp
+      fonts:
+        - asset: assets/fonts/MyFlutterApp.ttf
+    - family: Itim
+      fonts:
+        - asset: assets/fonts/Itim-Regular.ttf
+    - family: Salsa
+      fonts:
+        - asset: assets/fonts/Salsa-Regular.ttf
+    - family: Grandstander
+      fonts:
+        - asset: assets/fonts/Grandstander.ttf
+    
+
