@@ -20,10 +20,10 @@ class _SignUpViewState extends State<SignUpView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: CustomColors.black,
         toolbarHeight: 0,
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: CustomColors.black,
       body: Container(
           height: MediaQuery.sizeOf(context).height * 1,
           width: MediaQuery.sizeOf(context).width * 1,
