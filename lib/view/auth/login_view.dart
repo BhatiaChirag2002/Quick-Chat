@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quick_chat/utils/app_colors.dart';
 import 'package:quick_chat/utils/app_text_style.dart';
+import 'package:quick_chat/view/auth/signup_view.dart';
 import 'package:quick_chat/widget/auth_widget.dart';
 
 class LoginView extends StatefulWidget {
@@ -79,7 +80,12 @@ class _LoginViewState extends State<LoginView> {
                         HaveAccountButton(
                           question: 'Don\'t have Account?',
                           label: 'Sign Up',
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SignUpView()));
+                          },
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 20.h),

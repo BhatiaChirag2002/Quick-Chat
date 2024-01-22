@@ -108,6 +108,43 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   }
 }
 
+class NameTextField extends StatelessWidget {
+  final TextEditingController controller;
+  const NameTextField({
+    super.key,
+    required this.controller,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 340.w,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Full Name',
+            style: CustomTextStyle.salsa(fontSize: 22.sp),
+          ),
+          TextFormField(
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Enter your full name';
+                }
+                return null;
+              },
+              controller: controller,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: 'please fill full name',
+                hintStyle: CustomTextStyle.salsa(fontSize: 15.sp),
+              ))
+        ],
+      ),
+    );
+  }
+}
+
 class AuthButton extends StatelessWidget {
   final Function() onTap;
   final String label;
