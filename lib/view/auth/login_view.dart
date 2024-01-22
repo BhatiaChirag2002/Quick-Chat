@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quick_chat/utils/app_colors.dart';
 import 'package:quick_chat/utils/app_text_style.dart';
+import 'package:quick_chat/view/auth/forget_view.dart';
 import 'package:quick_chat/view/auth/signup_view.dart';
 import 'package:quick_chat/widget/auth_widget.dart';
 
@@ -68,7 +69,13 @@ class _LoginViewState extends State<LoginView> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ForgetView()));
+                                  },
                                   child: Text(
                                     'Forget Password?',
                                     style:
