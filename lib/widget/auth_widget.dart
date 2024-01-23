@@ -235,9 +235,9 @@ class SocialButton extends StatelessWidget {
         height: 45.h,
         width: 300.w,
         decoration: BoxDecoration(
-            color: CustomColors.black,
+            color: CustomColors.white,
             borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(30),
+                topLeft: Radius.circular(5),
                 bottomLeft: Radius.circular(5),
                 bottomRight: Radius.circular(5),
                 topRight: Radius.circular(5))),
@@ -255,7 +255,7 @@ class SocialButton extends StatelessWidget {
             Text(
               'Continue with $title',
               style: CustomTextStyle.salsa(
-                  fontSize: 20.sp, color: CustomColors.white),
+                  fontSize: 20.sp, color: CustomColors.black),
             ),
           ],
         ),
